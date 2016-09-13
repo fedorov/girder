@@ -4,6 +4,7 @@ $(function () {
     girderTest.addCoveredScripts([
         '/static/built/plugins/jobs/templates.js',
         '/plugins/jobs/web_client/js/misc.js',
+        '/plugins/jobs/web_client/js/views/CheckBoxMenu.js',
         '/plugins/jobs/web_client/js/views/JobDetailsWidget.js',
         '/plugins/jobs/web_client/js/views/JobListWidget.js'
     ]);
