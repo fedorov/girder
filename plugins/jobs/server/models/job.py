@@ -86,7 +86,7 @@ class Job(AccessControlledModel):
 
         if not event.defaultPrevented:
             job['status'] = JobStatus.CANCELED
-            self.save(job)
+            job = self.save(job)
 
         return job
 
@@ -316,6 +316,8 @@ class Job(AccessControlledModel):
             updates['$set'][k] = v
 
         if updates['$set'] or updates['$push']:
+            if not updates['$push']:
+                del updates['$push']
             job['updated'] = now
             updates['$set']['updated'] = now
 
@@ -344,7 +346,12 @@ class Job(AccessControlledModel):
 
     def _updateStatus(self, job, status, now, notify, user, updates):
         """Helper for updating job progress information."""
-        status = int(status)
+        try:
+            status = int(status)
+        except ValueError:
+            # Allow non int states
+            pass
+
         self._validateStatus(status)
 
         if status != job['status']:
