@@ -145,8 +145,8 @@ girder.views.jobs_JobListWidget = girder.View.extend({
     },
     _updateFilter: function (filter, newValues) {
         // We need to work out what keys have been removed or added
-        // so we can update the filter. We do this rather than created
-        // a new filter inorder to preserve the existing user selections.
+        // so we can update the filter. We do this rather than create
+        // a new filter in order to preserve the existing user selections.
         var currentValues = _.keys(filter), added, removed;
         added = _.difference(newValues, currentValues);
         removed = _.difference(currentValues, newValues);
